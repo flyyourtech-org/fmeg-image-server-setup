@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  image-server:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+    # Optional: use Doppler for secrets
+    # command: doppler run -- node index.js
