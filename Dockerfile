@@ -1,21 +1,24 @@
 FROM node:18-slim
 
-# Install git and ffmpeg
+# Install ffmpeg
 RUN apt-get update && \
-    apt-get install -y git ffmpeg && \
+    apt-get install -y ffmpeg && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /app
 
-# Clone your Node.js app
-RUN git clone https://github.com/Hackyabhay007/image-server.git .
+# Copy project files
+COPY . .
 
 # Install dependencies
-RUN npm install
+RUN npm install --production
+
+# Create uploads directory (safety)
+RUN mkdir -p /app/uploads
 
 # Expose app port
 EXPOSE 3000
 
-# Start the app
+# Start app
 CMD ["node", "index.js"]

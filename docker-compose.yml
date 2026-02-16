@@ -1,7 +1,16 @@
+version: "3.9"
+
 services:
   image-server:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: image-server
     ports:
       - "3001:3000"
+    volumes:
+      - uploads_data:/app/uploads
+    restart: always
+
+volumes:
+  uploads_data:
